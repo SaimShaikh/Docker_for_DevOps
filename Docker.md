@@ -66,6 +66,7 @@ It allows developers and DevOps engineers to **build, ship, and run applications
 ## 📊 Docker vs Virtual Machines
 
 ![Docker vs VM](https://www.redhat.com/rhdc/managed-files/virtualization-vs-containers.png)
-
+![Read This ](https://github.com/SaimShaikh/Docker_for_DevOps/blob/main/Containerization_VS_Virtualization.md)
 ---
+
 
