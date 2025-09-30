@@ -18,8 +18,6 @@ It allows developers and DevOps engineers to **build, ship, and run applications
 
 ## ⚙️ Docker Architecture
 
-![Docker Architecture](https://www.docker.com/wp-content/uploads/2022/03/architecture.svg)
-
 ### 🔑 Components
 1. **Docker Client**  
    - Command-line tool (`docker run`, `docker build`, etc.).  
@@ -66,7 +64,8 @@ It allows developers and DevOps engineers to **build, ship, and run applications
 ## 📊 Docker vs Virtual Machines
 
 ![Docker vs VM](https://www.redhat.com/rhdc/managed-files/virtualization-vs-containers.png)
-![Read This ](https://github.com/SaimShaikh/Docker_for_DevOps/blob/main/Containerization_VS_Virtualization.md)
+
+- https://github.com/SaimShaikh/Docker_for_DevOps/blob/main/Containerization_VS_Virtualization.md
 ---
 
 
