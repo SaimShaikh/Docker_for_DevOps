@@ -92,6 +92,25 @@ To understand how Docker works, let’s break down its **architecture** step by 
 
 - Docker reads the Dockerfile step by step and creates an image. Later, we can run containers from that image anywhere.
 
+
+----
+
+# 📌 Step-by-step with Dockerfile Instructions
+
+| Instruction | What it does                               | Scenario Example                                                         |
+| ----------- | ------------------------------------------ | ------------------------------------------------------------------------ |
+| `FROM`      | Choose a base image (starting point).      | You need Python, so: <br> `FROM python:3.9`                              |
+| `WORKDIR`   | Set working folder inside container.       | Tell Docker: “work inside `/app`.” <br> `WORKDIR /app`                   |
+| `COPY`      | Copy files from host → container.          | Bring your project code into the image. <br> `COPY . /app`               |
+| `RUN`       | Execute a command at build time.           | Install Flask & dependencies: <br> `RUN pip install -r requirements.txt` |
+| `ENV`       | Set environment variable.                  | Example: set the app port <br> `ENV PORT=5000`                           |
+| `EXPOSE`    | Declare which port container listens on.   | Flask runs on `5000`: <br> `EXPOSE 5000`                                 |
+| `CMD`       | Final default command when container runs. | Start your app: <br> `CMD ["python", "app.py"]`                          |
+
+
+---
+
+
 ### Common instructions:
 
 ```bash
@@ -107,3 +126,30 @@ EXPOSE → Ports used.
 ```
 
 > Used with docker build to create images.
+
+### what is the build time and run time in docker
+
+**📌 The Core Idea**
+
+- Build Time = when Docker is building the image (using your Dockerfile).
+    - Think of it like: Build time → baking a cake 🎂 (ingredients + recipe).
+
+**Happens when you run:**
+
+``docker build -t myapp . ``
+
+### 🔹 What happens here:
+
+- Docker reads the Dockerfile.
+
+- Executes instructions like FROM, RUN, COPY, ENV, etc.
+
+- Creates an image (a frozen snapshot with everything ready).
+> 👉 Once done, you have a nice Docker image 🍱 (like a packed lunchbox).
+---
+
+- Run Time = when Docker is running a container from that image.
+  - Think of it like: Run time → eating the cake 🍴 (cake is ready to serve).
+ 
+
+  
