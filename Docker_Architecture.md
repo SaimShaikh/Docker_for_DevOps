@@ -127,29 +127,133 @@ EXPOSE → Ports used.
 
 > Used with docker build to create images.
 
-### what is the build time and run time in docker
+---
+
+
+### 🐳 What is Build Time and Run Time in Docker
 
 **📌 The Core Idea**
 
-- Build Time = when Docker is building the image (using your Dockerfile).
-    - Think of it like: Build time → baking a cake 🎂 (ingredients + recipe).
+- **Build Time** = when Docker is building the image (using your Dockerfile).  
+    - Think of it like: **Build time → baking a cake 🎂 (ingredients + recipe).**
+    - 
+### 📌 Run Time
 
+- **Run Time** = when Docker is running a container from that image.
+    - Think of it like: Run time → eating the cake 🍴 (cake is ready to serve).
 **Happens when you run:**
 
-``docker build -t myapp . ``
+```bash
+docker build -t myapp .
+```
 
-### 🔹 What happens here:
+**🔹 What happens here:**
 
 - Docker reads the Dockerfile.
 
 - Executes instructions like FROM, RUN, COPY, ENV, etc.
 
 - Creates an image (a frozen snapshot with everything ready).
-> 👉 Once done, you have a nice Docker image 🍱 (like a packed lunchbox).
+
+**👉 Once done, you have a nice Docker image 🍱 (like a packed lunchbox).**
+
+
 ---
 
-- Run Time = when Docker is running a container from that image.
-  - Think of it like: Run time → eating the cake 🍴 (cake is ready to serve).
- 
+**📌 Build Time Example (RUN vs CMD)**
 
-  
+- Dockerfile
+
+```bash
+FROM ubuntu
+RUN echo "this is build time"
+CMD echo "this is CMD test in build time"
+
+```
+
+---
+
+- During build:
+`` docker build -t myapp .``
+  **Output** ``this is build time``
+
+> (only RUN executes)
+
+``docker run myapp ``
+- During run:
+
+**and when we run docker run myapp**
+
+``this is CMD test in build time``
+> (CMD executes at run time)
+
+**Try to override**
+Override:
+
+`` docker run mycmd echo "Hi Boss!" .``
+
+---
+
+
+### ENTRYPOINT works on time run time 
+
+### 📌 Why?
+
+- At build time, ENTRYPOINT is only defined (saved into the image metadata).
+
+- At run time, when you start a container, Docker executes ENTRYPOINT as the main command.
+
+
+### 📌 Example
+
+- Dockerfile
+
+```bash
+FROM ubuntu
+RUN echo "This is build time"
+ENTRYPOINT ["echo", "This is run time (ENTRYPOINT)"]
+
+```
+- Build it:
+``docker build -t myapp .``
+
+### 👉 Output at build time:
+
+``This is build time``
+> (Only RUN executes)
+
+- Run it:
+``docker run myapp``
+
+
+### 👉 Output at run time:
+
+- This is run time (ENTRYPOINT)
+
+- Run with extra argument:
+``docker run myapp Boss``
+
+### 👉 Output:
+
+``This is run time (ENTRYPOINT) Boss``
+
+---
+
+### 📌 Comparison Recap
+
+| Instruction  | Build Time | Run Time |
+| ------------ | ---------- | -------- |
+| `RUN`        | ✅ Yes      | ❌ No     |
+| `CMD`        | ❌ No       | ✅ Yes    |
+| `ENTRYPOINT` | ❌ No       | ✅ Yes    |
+
+---
+
+## the simple rule is:
+
+- RUN → build time 👨‍🍳
+
+- CMD → run time (replaceable 🍕)
+
+- ENTRYPOINT → run time (fixed 🍔, args only)
+---
