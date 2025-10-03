@@ -36,7 +36,23 @@ To understand how Docker works, let’s break down its **architecture** step by 
 - The Docker client (CLI) only sends instructions, but the daemon is the engine that makes containers run.
 - It listens to requests from the Docker Client and executes them.
 
-### 3. **Docker Images**
+### 3. **Docker Registry (Docker Hub / Private Registry)**
+
+- A Docker Registry is like a storage or library where Docker images are kept.
+
+- When we build an image, we can push it to a registry so that others (or our servers) can pull it and run containers.
+
+- The most common public registry is Docker Hub, but we can also use private registries like AWS ECR, GCP Artifact Registry, or Harbor.
+- Workflow:
+    - docker pull <image> → downloads from registry
+    - docker push <image> → uploads to registry 
+
+
+
+<img width="1382" height="474" alt="SCR-20251003-qbss" src="https://github.com/user-attachments/assets/600830a2-cfdf-4057-9bde-1f2db3c5f5f1" />
+
+
+### 4. **Docker Images**
 - A Docker image is like a blueprint or template for creating containers.
 
 - It has the application code, runtime, libraries, and all dependencies inside it.
@@ -47,7 +63,7 @@ To understand how Docker works, let’s break down its **architecture** step by 
     - python:3.9 → Python environment
 - You can create your own images using a Dockerfile.
 
-### 4. **Docker Containers**
+### 5. **Docker Containers**
 
 - A Docker container is like a small, lightweight box that has everything an application needs to run — the code, libraries, and settings.
 
@@ -60,32 +76,9 @@ To understand how Docker works, let’s break down its **architecture** step by 
 ``docker run -d -p 8080:80 nginx``
 **👉 Runs an Nginx web server in a container.**
 
-### 5. **Docker Registry (Docker Hub / Private Registry)**
-
-- A Docker Registry is like a storage or library where Docker images are kept.
-
-- When we build an image, we can push it to a registry so that others (or our servers) can pull it and run containers.
-
-- The most common public registry is Docker Hub, but we can also use private registries like AWS ECR, GCP Artifact Registry, or Harbor.
-- Workflow:
-    - docker pull <image> → downloads from registry
-    - docker push <image> → uploads to registry 
-
-
-**✅ Key Points to Remember**
-
-- Images → Blueprints
-
-- Containers → Running instances
-
-- Daemon → The engine
-
-- Client → Your commands
-
-- Registry → Where images live
 
 ----
-### What ia the Dockerfile
+### 6. What ia the Dockerfile
 - A Dockerfile is a simple text file that has a set of instructions to build a Docker image.
 
 - Instead of creating an image manually, we write steps inside the Dockerfile — like which base image to use, what packages to install, copy application code, and what command should run.
