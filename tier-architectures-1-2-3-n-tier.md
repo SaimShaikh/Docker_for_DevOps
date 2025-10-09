@@ -64,7 +64,8 @@ Keep validation split:
 
 ## 1-Tier vs 2-Tier vs 3-Tier vs N-Tier
 
-<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/3521e1ae-5b08-4b1a-bcd2-983199602384" />
+<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/c38c4128-d12f-4c41-8d01-907b74d82ece" />
+
 
 
 ### 1-Tier (Monolithic Deploy)
@@ -75,7 +76,8 @@ Keep validation split:
 **Typical use**: prototypes, internal tools, single-user desktop apps.
 
 ---
-<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/a56e78b8-3275-46c6-b1dc-97f826897b68" />
+<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/426c9b31-b2a7-40a4-8a35-431915be8f77" />
+
 
 ### 2-Tier (Client ↔ Database)
 - **Client** talks **directly** to the **DB**.
@@ -86,6 +88,8 @@ Keep validation split:
 **Typical use**: legacy client/server, small LAN apps.
 
 ---
+<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/9394c8c5-6e15-487c-94df-e12467830ae2" />
+
 
 ### 3-Tier (Presentation ↔ Logic/API ↔ Database)
 - Web/mobile client → **API (business)** → **DB**.
@@ -95,6 +99,8 @@ Keep validation split:
 **Typical use**: most web apps done right.
 
 ---
+<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/a59e9cb3-f2b9-4b38-b8a3-8c6f7fe01fb8" />
+
 
 ### N-Tier (Add Gateways, Services, Queues, Caches…)
 - Break the logic layer into **multiple services** (auth, billing, search, etc).
