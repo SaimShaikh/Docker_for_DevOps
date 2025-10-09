@@ -1,3 +1,5 @@
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/ebc4d125-4025-41ce-8254-735b54801c45" />
+
 # 🧑‍💻 Developer → DevOps Handoff Guide
 
 This repository explains **what information a developer should provide to a DevOps engineer** when starting a new project.  
