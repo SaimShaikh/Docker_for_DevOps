@@ -79,21 +79,10 @@ This repo standardizes that process.
 
 ---
 
-## 🧰 Example Folder
-The [`example-project-structure`](./example-project-structure/) folder contains a **sample Node.js app** showing what a good developer handoff looks like — including:
-- Dockerfile
-- .env.example
-- README.md
-
----
-
-## 💬 Contribution
-Want to add Python, Java, or Go examples?  
-Fork this repo and send a PR — let’s make DevOps–Dev collaboration smoother for everyone.
 
 ---
 
 ## 🧠 Maintainer
 **Saime Shaikh** – DevOps Enthusiast 💙  
 📧 shaikhsaime02@gmail.com  
-🔗 [LinkedIn](https://www.linkedin.com/in/saime-shaikh)
+
