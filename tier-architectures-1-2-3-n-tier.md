@@ -112,23 +112,6 @@ Keep validation split:
 
 ---
 
-## Request Flow (3-Tier)
-
-```mermaid
-sequenceDiagram
-  participant U as User
-  participant P as Presentation (Web/App)
-  participant L as Logic/API
-  participant D as Database
-
-  U->>P: Click "Place Order"
-  P->>L: POST /orders {cart}
-  L->>L: Validate business rules, calc totals, inventory check
-  L->>D: BEGIN TX; INSERT/UPDATE rows
-  D-->>L: OK
-  L-->>P: 201 Created {orderId}
-  P-->>U: Show confirmation
-```
 
 ## Pros & Cons
 | Architecture | Pros                                            | Cons                                                       |
