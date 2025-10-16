@@ -73,13 +73,8 @@ This repo standardizes that process.
 - Deploy using Terraform, Ansible, or Kubernetes  
 - Set up monitoring and logging  
 
----
 
-## 🗂️ Reference Files
-- [`developer-responsibilities.md`](./developer-responsibilities.md): Full breakdown of what developers handle  
-- [`handoff-checklist.md`](./handoff-checklist.md): Ready-to-use checklist for your next project  
 
----
 
 
 ---
