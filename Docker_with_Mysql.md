@@ -3,24 +3,26 @@ docker pull mysql
 docker images
 
 ```
-<img width="1920" height="1080" alt="Screenshot 2025-10-20 at 6 46 56 PM (2)" src="https://github.com/user-attachments/assets/7e527291-462f-4b44-a596-c30cce292e7d" />
+
 <img width="1680" height="1050" alt="Screenshot 2025-10-20 at 6 46 56 PM" src="https://github.com/user-attachments/assets/1293c3d0-f0c7-4bef-8ae3-d6c530a555b5" />
-<img width="1920" height="1080" alt="Screenshot 2025-10-20 at 6 47 25 PM (2)" src="https://github.com/user-attachments/assets/422bcb72-60e8-4e16-a75e-54991e071e87" />
+
 <img width="1680" height="1050" alt="Screenshot 2025-10-20 at 6 47 25 PM" src="https://github.com/user-attachments/assets/5915dd7a-d0b9-4b05-8a88-2acf29e9aacb" />
 
+## After Successfully pulling the image we need to assign the User ID and Password to mysql container 
 ```bash
 docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=mydb -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin -p 3306:3306 mysql
 ```
 
+## Login into Mysql Container 
 ```bash
-docker exec -it 30c6e38c0603 bash
+docker exec -it <IMAGE NAME> bash
 ```
-or 
 
+## 🧑‍💻 Login into MySQL
 ```bash
 docker exec -it mysql mysql -u admin -p   # Enter admin pass 
 ```
-<img width="1920" height="1080" alt="Screenshot 2025-10-20 at 7 08 04 PM (2)" src="https://github.com/user-attachments/assets/04eb2ab8-3bea-48f5-8567-fa4b4bc6f8f8" />
+
 
 <img width="1680" height="1050" alt="Screenshot 2025-10-20 at 7 08 04 PM" src="https://github.com/user-attachments/assets/c2941b95-7df3-44a3-9ff5-434119eee79a" />
 
