@@ -3,7 +3,7 @@
 <img width="2048" height="2048" alt="image" src="https://github.com/user-attachments/assets/de16b616-1ecc-476d-b23c-59e9b59379d4" />
 
 
-A simple and beginner-friendly guide explaining the Docker container lifecycle in easy words. This repository is designed for learners who want a clear understanding of how containers move through each phase of their existence — from **build** to **remove**.
+
 
 ---
 
@@ -55,17 +55,7 @@ docker stop myapp
 docker rm myapp
 ```
 
----
 
-## 🧭 Repository Structure
-
-```
-container-lifecycle-guide/
-├── README.md          # Main documentation (this file)
-├── assets/            # Posters, infographics, and visuals
-│   └── container-lifecycle.png
-└── LICENSE            # Open-source license
-```
 
 ---
 
