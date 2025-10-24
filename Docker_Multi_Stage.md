@@ -149,20 +149,6 @@ CMD ["java", "-jar", "app.jar"]
 
 ---
 
-## Repo structure suggestion (minimal)
-
-```
-/docker-multistage-repo
-├─ README.md            # this doc
-├─ examples/
-│  ├─ python/Dockerfile
-│  ├─ node/Dockerfile
-│  ├─ react/Dockerfile
-│  └─ java/Dockerfile
-└─ .gitignore
-```
-
----
 
 ## Final note
 
