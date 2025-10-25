@@ -20,8 +20,7 @@
 6. [Advantages & disadvantages (side-by-side)](#pros-cons)
 7. [Real-world companies using them (short examples)](#real-world)
 8. [Simple decision checklist](#checklist)
-9. [Suggested repo structure & starter files](#repo-structure)
-10. [Next steps / learning resources](#resources)
+
 
 ---
 
@@ -42,7 +41,7 @@ Think of a monolith as a single-family house — easy to build and maintain when
 
 ---
 
-## What is a Monolithic Architecture? {#monolithic}
+## What is a Monolithic Architecture? { # monolithic}
 
 **Definition (easy words):** A monolith is a single application where all features (UI, business logic, database access) live together and are deployed as one unit.
 
@@ -55,7 +54,7 @@ Think of a monolith as a single-family house — easy to build and maintain when
 
 ---
 
-## What is a Microservices Architecture? {#microservices}
+## What is a Microservices Architecture? { # microservices}
 
 **Definition (easy words):** Microservices split the application into multiple small services; each service owns a small set of responsibilities and can be developed, deployed, scaled, and maintained independently.
 
