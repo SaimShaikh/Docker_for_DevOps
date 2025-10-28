@@ -12,3 +12,4 @@
 | 🐳 Docker Project         | [View Project](https://github.com/SaimShaikh/docker-project)               |
 | 📝 Note App               | [View Project](https://github.com/SaimShaikh/my-note-app)                  |
 | ✅ To-Do App               | [View Project](https://github.com/SaimShaikh/todo-app)                     |
+| 📺 Netflix                 |[View Project](https://github.com/abhipraydhoble/Project-Netflix-Clone.git)|
