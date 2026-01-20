@@ -230,3 +230,13 @@ If Docker daemon is down, I first check the service status and restart it.
 If it doesn’t start, I check daemon logs, disk space, system resources, and Docker configuration files.
 Most issues are caused by disk full, config errors, or resource exhaustion.
 As a last step, I reinstall Docker.
+
+
+--- 
+
+## Is it possible to use JSONinstead of YAML for Docker Compose?
+
+We can use JSON instead of YAML for a Docker Compose file. When we
+are using the JSON file for composing, we have to specify the filename
+with the following command:
+``docker-compose -f docker-compose. json up``
