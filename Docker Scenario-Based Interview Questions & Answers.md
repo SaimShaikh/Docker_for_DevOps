@@ -143,12 +143,25 @@ This allows zero-downtime deployments.
 
 ## How would you configure logging for Docker containers?
 
-Docker captures container logs using stdout and stderr.
+Docker container logs are stored on the host system, not inside the container itself. The default location depends on the operating system:
 
-I forward these logs to centralized logging systems like ELK or CloudWatch.  
-This makes debugging easier and keeps logs consistent across environments.
+Linux: /var/lib/docker/containers/<container-id>/<container-id>-json.log
+Each container has a dedicated log file in JSON format, containing timestamps, stream origin (stdout/stderr), and message content.
+Windows: C:\ProgramData\docker\containers\<container-id>\<container-id>-json.log
+Logs are stored in the Docker Desktop WSL2 VM, accessible via the path \\wsl.localhost\docker-desktop\mnt\docker-desktop-disk\data\docker\containers\....
+macOS: Logs are stored within the Docker Desktop VM at ~/Library/Containers/com.docker.docker/Data/log/vm/. Access them using docker logs or directly via the VM.
 
-Logs should be centralized, searchable, and retained properly.
+To configure logging for Docker
+containers, I would use Docker's
+logging drivers to capture and
+forward application logs to a
+centralized logging system such as
+Elasticsearch, Fluentd, or Splunk.
+
+I would configure the logging driver
+in the Docker daemon or Docker
+Compose file to specify the
+destination and format of the logs.
 
 ---
 
