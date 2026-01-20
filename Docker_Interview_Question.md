@@ -1,6 +1,4 @@
-# Day 4 Docker
 
----
 
 ## Q1 What is Docker
 
