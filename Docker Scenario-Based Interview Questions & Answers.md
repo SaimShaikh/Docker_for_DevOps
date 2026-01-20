@@ -178,12 +178,24 @@ Security scanning is a standard CI/CD step.
 
 ## How would you implement backup and disaster recovery for Dockerized applications?
 
-I back up Docker volumes regularly and store them in secure remote storage.
-
-For disaster recovery, I document restore procedures and test them periodically.  
-Infrastructure is recreated using IaC tools, and data is restored from backups.
-
-Recovery is only reliable if it’s tested.
+To implement backup and disaster
+recovery strategies for Dockerized
+applications, I would use a combination of
+Docker volume backups, container image
+registries, and cloud storage solutions.
+I would regularly back up Docker volumes
+containing persistent data using tools like
+Docker Volume Backup or container-
+native backup solutions.
+Additionally, I would store container
+images in a secure registry such as Docker
+Hub or AWS ECR, enabling easy recovery
+and redeployment in the event of a
+disaster.
+Cloud storage solutions like AWS S3 or
+Azure Blob Storage can be used to store
+backups offsite for added redundancy and
+resilience.
 
 ---
 
