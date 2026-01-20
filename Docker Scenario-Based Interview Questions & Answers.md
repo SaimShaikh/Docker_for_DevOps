@@ -240,3 +240,14 @@ We can use JSON instead of YAML for a Docker Compose file. When we
 are using the JSON file for composing, we have to specify the filename
 with the following command:
 ``docker-compose -f docker-compose. json up``
+
+
+---
+
+## What is Immutable Infrastructure? How Docker Supports Immutable Infrastructure
+Immutable infrastructure means: Once something is created and deployed, we do NOT change it.
+
+Docker supports this by using immutable images and disposable containers.
+Any change requires building a new image and redeploying containers, which improves consistency, reliability, and rollback.
+
+---
