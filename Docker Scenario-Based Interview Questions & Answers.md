@@ -199,7 +199,17 @@ resilience.
 
 ---
 
-## Final Note
+## What is the difference between ADD and COPY in Docker?
 
-These answers are designed to sound **natural, confident, and practical** in interviews.  
-If you can explain Docker like this, you won’t just pass interviews — you’ll stand out.
+COPY is used to just copy files and folders from your system into the Docker image.
+It does only one job, so it’s safe and recommended for most cases.
+
+ADD can also copy files, but it has extra features like extracting .tar files and downloading files from a URL.
+
+---
+
+### What is Docker Container Lifecycle?
+
+Docker container lifecycle starts with creating an image, then creating and running a container.
+A container can be paused, stopped, restarted, and finally removed.
+Once removed, the container is permanently deleted and cannot be reused.
