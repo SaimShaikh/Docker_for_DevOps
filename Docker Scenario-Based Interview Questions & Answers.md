@@ -33,6 +33,8 @@ Volumes are managed by Docker and persist even if the container is deleted.
 
 In production, volumes are always preferred over bind mounts because they are safer, portable, and easier to back up.
 
+
+
 ---
 
 ## Explain a scenario where Docker Compose would be beneficial for managing multi-container applications
@@ -213,3 +215,18 @@ ADD can also copy files, but it has extra features like extracting .tar files an
 Docker container lifecycle starts with creating an image, then creating and running a container.
 A container can be paused, stopped, restarted, and finally removed.
 Once removed, the container is permanently deleted and cannot be reused.
+
+**Common Interview Trap (Tell This If Asked)**
+
+- Stopping a container does NOT delete it
+
+- Deleting a container does NOT delete the image
+
+---
+
+## What if Docker daemon is down? How do you solve it?
+
+If Docker daemon is down, I first check the service status and restart it.
+If it doesn’t start, I check daemon logs, disk space, system resources, and Docker configuration files.
+Most issues are caused by disk full, config errors, or resource exhaustion.
+As a last step, I reinstall Docker.
