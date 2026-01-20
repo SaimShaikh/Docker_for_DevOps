@@ -103,9 +103,20 @@ This improves reliability without manual intervention.
 
 I never hardcode secrets in images.
 
-Instead, I use environment variables, Docker secrets, or external secret managers like AWS Secrets Manager or Vault.
+Docker secrets allow you to
+securely store and manage
+sensitive information such as
+passwords, API keys, and TLS
+certificates, encrypted at rest
+and in transit.
+Secrets can be accessed by
+up to
+services running in Docker
+Swarm and are only ava able t
+authorized containers,
+preventing unauthorized access
+to sensitive data.
 
-This ensures sensitive data is encrypted, controlled, and not exposed in source code or images.
 
 ---
 
