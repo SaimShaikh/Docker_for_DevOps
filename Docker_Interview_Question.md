@@ -320,7 +320,7 @@ There are various ways to monitor Docker containers, including:
 
 ---
 
-## What are some best practices for using Docker in production environments?
+## Q24 What are some best practices for using Docker in production environments?
 
 Some best practices for using Docker in production environments include:
 
@@ -337,7 +337,7 @@ Docker Interview Questions 16 Implementing a comprehensive security strategy, in
 
 ---
 
-## Q24 What is ARG and ENV in Docker
+## Q25 What is ARG and ENV in Docker
 
 ARG is used to pass variables at build time while creating a Docker image and is not accessible at runtime.  
 
