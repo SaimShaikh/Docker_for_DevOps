@@ -251,3 +251,24 @@ Docker supports this by using immutable images and disposable containers.
 Any change requires building a new image and redeploying containers, which improves consistency, reliability, and rollback.
 
 ---
+
+## Running container as a root means ?
+In Linux, root = UID 0.
+Running a container as root means the main process inside the container runs with UID 0, giving it full permissions inside the container, which increases security risk if the container is compromised.
+
+**you avoid root containers**
+We avoid root containers by creating non-root users in the image, enforcing securityContext in Kubernetes, dropping capabilities, and avoiding privileged mounts.
+
+**Use a non-root user in Dockerfile**
+```bash
+FROM ubuntu:22.04
+
+# Create a non-root user
+RUN useradd -m -u 10001 appuser
+
+# Switch to non-root
+USER appuser
+
+CMD ["bash"]
+```
+
