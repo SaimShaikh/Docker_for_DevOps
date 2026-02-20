@@ -78,6 +78,8 @@ Docker namespaces are used to isolate containers by giving them separate views o
 
 ## Q10 CMD vs ENTRYPOINT
 
+CMD and ENTRYPOINT use to define the command that run whne container start. 
+
 CMD defines the default command or arguments for a container and can be overridden at runtime.  
 
 ENTRYPOINT defines the main command that always runs when the container starts.
