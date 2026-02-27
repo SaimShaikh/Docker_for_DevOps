@@ -234,7 +234,7 @@ As a last step, I reinstall Docker.
 
 --- 
 
-## Is it possible to use JSONinstead of YAML for Docker Compose?
+## Is it possible to use JSON instead of YAML for Docker Compose?
 
 We can use JSON instead of YAML for a Docker Compose file. When we
 are using the JSON file for composing, we have to specify the filename
