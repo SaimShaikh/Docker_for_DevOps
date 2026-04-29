@@ -272,3 +272,23 @@ USER appuser
 CMD ["bash"]
 ```
 
+
+---
+## Can you delete a Docker image while a container is running from it?
+
+No, you cannot delete a Docker image if a container is currently running from it.
+
+Docker prevents this because the running container depends on that image. You must stop and remove the container first, and then you can delete the image.
+
+---
+
+## What is the difference between mutable and immutable in Docker?
+
+In Docker, mutable means something can be changed after it is created, while immutable means it cannot be changed.
+
+Docker images are immutable — once built, they don’t change. If updates are needed, a new image is created.
+Containers, however, are mutable — you can modify them while they are running.
+
+---
+
+
