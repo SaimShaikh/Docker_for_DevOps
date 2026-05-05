@@ -291,4 +291,270 @@ Containers, however, are mutable — you can modify them while they are running.
 
 ---
 
+## Container starts but application not reachable. What will you check?
+
+If a container is running but the application is not reachable, I follow a structured troubleshooting approach.
+
+First, I check the container logs using docker logs to see if the application has any runtime errors or crashes.
+
+Next, I verify the port mapping to ensure the container port is correctly exposed to the host, using docker ps or docker port.
+
+Then, I go inside the container using docker exec and check whether the application is actually running and listening on the expected port using netstat or ss.
+
+I also confirm that the application is bound to 0.0.0.0 and not 127.0.0.1, because binding to localhost will prevent external access.
+
+After that, I check the network and firewall settings:
+
+- Security Groups or firewall rules (in cloud)
+
+---
+
+
+## Container exits immediately after start. What could be wrong?
+
+If a container exits immediately after starting, it usually means the main process inside the container has stopped.
+
+First, I check the container logs using docker logs to identify any error messages or crashes.
+
+The most common reasons are:
+
+The application inside the container failed to start due to errors or missing dependencies
+The CMD or ENTRYPOINT is incorrect or not defined properly
+The process runs and exits immediately (for example, a script finishes execution)
+The container is not running a long-running process (like a server)
+Configuration issues such as wrong environment variables
+
+I also verify the Dockerfile to ensure the correct command is used and that the application is designed to run in the foreground.
+
+
+---
+
+## Image build succeeds but app fails at runtime. Why?
+
+Common causes
+- Missing runtime dependencies: Build uses dev packages (like npm install with devDeps), but runtime lacks libraries, drivers, or Node modules.
+
+- Environment variables: App expects DB_URL or API keys not set at runtime.
+
+- Port binding or networking: App tries to listen on wrong port or can't reach DB/external services.
+
+- Permissions/files: Wrong user (non-root), file paths, or volumes not mounted, causing "file not found" or access denied.
+
+- Resources: OOM at runtime due to low memory limits, not hit during build.
+
+Debug steps
+- docker logs <container> for error like "Unable to access jarfile" or connection refused.
+
+- docker run -it <image> /bin/sh to inspect files, env (env), and test the CMD manually.
+
+- Compare build vs runtime: Check Dockerfile ENTRYPOINT/CMD, multi-stage build stripping dev tools.
+
+---
+
+## Port mapping configured but not working. What will you verify?
+
+First, I check the port mapping configuration using docker ps to ensure the host port is correctly mapped to the container port.
+
+Next, I confirm that the application inside the container is actually running and listening on the expected port by entering the container with docker exec and using netstat or ss.
+
+Then, I verify that the application is bound to 0.0.0.0 and not 127.0.0.1, because binding to localhost will block external access.
+
+I also check for port conflicts on the host machine to ensure the host port is not already in use.
+
+After that, I validate firewall or security group rules (in case of cloud) to ensure the port is open.
+
+If multiple containers are involved, I check the Docker network configuration to ensure proper connectivity.
+
+---
+
+## Logs are empty or missing. Where will you look?
+
+If container logs are empty or missing, I don’t rely only on docker logs. I check multiple places to trace the issue.
+
+First, I verify how the application is handling logs.
+👉 If the app is writing logs to files inside the container instead of stdout/stderr, they won’t appear in docker logs. So I go inside the container using docker exec and check log files (like /var/log/... or app-specific paths).
+
+Next, I check if the container is exiting too quickly, which might result in no logs being captured.
+
+Then, I inspect the container using docker inspect to verify:
+
+Logging driver configuration
+Any misconfiguration in log settings
+
+I also check the Docker daemon logs on the host system (like /var/log/docker.log or journalctl -u docker) in case the issue is at the engine level.
+
+---
+
+## Volume not persisting data. What will you troubleshoot? 
+
+What to troubleshoot
+- Wrong write path: App writes to container filesystem (e.g., /app/data) instead of mounted path (/data). Verify with docker exec ls -la /mount/path.
+
+- Mount not applied: docker inspect <container> | grep Mounts — confirm volume/bind shows correct source:target. Wrong syntax in docker run/compose creates anonymous volume. 
+
+- Bind mount override: Host dir empty or read-only; container init scripts populate non-mounted paths first.
+
+- Volume type: Anonymous (dangling) vs named; recreate with docker volume rm and recreate properly. Check docker volume ls.
+
+- Permissions: App runs as non-root, can't write to volume owned by root. Fix with USER in Dockerfile or chown.
+
+---
+
+## Container cannot reach another service. Why?
+
+Exec into the source container and try ping <service-name> and curl service-name:port to test DNS and connectivity. Verify both on same network via docker network inspect. Check target service is running, listening on 0.0.0.0:port, and healthy. Rule out host firewall blocking docker bridge or startup race conditions with healthchecks/retries.
+
+---
+
+## Docker build cache causing issues. How will you handle it?
+
+If Docker build cache is causing issues, it usually means old layers are being reused, so recent changes are not reflected in the image.
+
+First, I confirm whether caching is the problem by rebuilding the image with:
+
+- docker build --no-cache -t <image_name> .
+
+If the issue is resolved, then it’s clearly a caching problem.
+
+Next, I handle it properly instead of always disabling cache:
+
+I reorder Dockerfile instructions so frequently changing steps (like copying source code) come later
+I ensure that COPY or ADD commands are placed correctly, because Docker cache depends on file changes
+I avoid unnecessary caching for dependency installation when required
+
+If needed, I manually clean unused cache using:
+
+- docker builder prune
+
+I also make sure that:
+
+Build context is correct
+No stale files are being copied
+
+---
+
+## Image pull failing from registry. What could be the reason?
+
+Common reasons
+- Authentication: Not logged in to private registry (docker login), expired token, or wrong creds. Public like Docker Hub rate-limited.
+
+- Network/Connectivity: TLS handshake timeout, proxy/VPN/firewall blocking registry.docker.io, DNS issues, or IPv6 problems.
+
+- Image not found: Typo in repo/tag (e.g., ngnix vs nginx), 404, or doesn't exist. Verify on hub.docker.com.
+
+- Disk/Storage full: Local disk out of space during pull, causing verification fail.
+
+- Registry-specific: ECR needs aws ecr get-login-password, disk full on host for layered pulls.
+
+---
+
+## Wrong environment variables inside container. How will you verify?
+
+Verification methods
+Inspect stopped/any container/image: docker inspect <container/image> --format '{{range .Config.Env}}{{.}}\n{{end}}' or docker inspect <name> | jq '.[].Config.Env'. Shows all set vars. 
+
+Exec running container: docker exec <container> env or docker exec <container> printenv VAR_NAME. Real runtime values.
+
+K8s: kubectl exec <pod> -- env | grep VAR or kubectl describe pod for env sources. 
+
+Compose: docker compose config to see resolved vars before run.
+
+
+---
+
+## Need to rollback to previous image version. How will you do it?
+
+- Rollback steps (Docker)
+
+```bash
+# 1. List local images to find previous version
+docker images | grep myapp
+
+# 2. Stop current container
+docker stop mycontainer
+docker rm mycontainer
+
+# 3. Run previous version (use digest or tag)
+docker run -d --name mycontainer myapp:v1.2.0
+
+```
+Docker Compose rollback
+
+```bash
+
+# Edit docker-compose.yml, change image: myapp:latest → myapp:v1.2.0
+# Then:
+docker-compose down
+docker-compose up -d
+```
+
+---
+
+## Container not starting after host reboot. Why?
+
+Containers are not persistent services by default — restart policies or orchestration tools are needed for auto-recovery.
+
+---
+
+## Docker Compose service not starting. What will you verify?
+
+Verification checklist
+
+- Config syntax: docker compose config -q — fails on YAML errors like wrong indentation.
+
+- Service status/exit codes: docker compose ps -a — look for "Exited (1)", then docker compose logs --tail=50 <service>.
+
+- Image availability: docker compose images — pull fails? Check auth/network.
+
+- Port conflicts/volumes: docker compose ps --format "table {{.Name}}\t{{.Ports}}" and docker compose config --volumes — host ports taken, volumes missing.
+
+- Dependencies: depends_on but service crashes before ready — use healthchecks.
+
+- Env vars: docker compose run --rm <service> env — missing vars cause startup fail.
+
+---
+
+## Works in dev but fails in production container. Why?
+
+If it works in dev but fails in a production container, it usually means there’s a difference between the environments.
+
+- First, I check environment variables and configuration:
+
+Missing or incorrect values (DB URL, API keys, ports)
+
+- Next, I verify dependency differences:
+
+Different versions of libraries or packages
+Something installed locally but missing in the container
+
+- Then, I check file paths and OS differences:
+
+Case sensitivity (Linux vs local system)
+Wrong working directory or missing files
+
+- I also look at network and external services:
+
+Database or API not reachable in production
+Firewall or security group restrictions
+
+- Another common issue is port and binding configuration:
+
+App might be running on a different port
+Bound to 127.0.0.1 instead of 0.0.0.0
+
+- I also check permissions:
+
+File or directory access issues inside container
+
+- And finally, I review build vs runtime differences:
+
+Something works during build but fails at runtime
+
+
+Dev and production environments must be consistent — otherwise hidden differences cause failures.
+
+---
+
+
+
 
